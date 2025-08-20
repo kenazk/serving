@@ -19,11 +19,9 @@ jobs:
         uses: fossas/fossa-action@main  # Pin to a release if needed
         with:
           api-key: ${{ secrets.FOSSA_API_KEY }}
-          config: ./config/.fossa.yml
 
       - name: Run FOSSA Test
         uses: fossas/fossa-action@main
         with:
           api-key: ${{ secrets.FOSSA_API_KEY }}
           run-tests: true
-          config: ./config/.fossa.yml
