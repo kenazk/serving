@@ -1,0 +1,28 @@
+name: FOSSA Scan on PR
+
+on:
+  pull_request:
+    branches:
+      - '**'  # Trigger on PRs to any branch
+
+jobs:
+  fossa-scan:
+    name: Run FOSSA Scan & Test
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v3
+
+      - name: Run FOSSA Scan
+        uses: fossas/fossa-action@main  # Pin to a release if needed
+        with:
+          api-key: ${{ secrets.FOSSA_API_KEY }}
+          config: ./config/.fossa.yml
+
+      - name: Run FOSSA Test
+        uses: fossas/fossa-action@main
+        with:
+          api-key: ${{ secrets.FOSSA_API_KEY }}
+          run-tests: true
+          config: ./config/.fossa.yml
